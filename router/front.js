@@ -5,7 +5,7 @@ var router = express.Router()
 
 // middleware that is specific to this router
 router.use(function timeLog(req, res, next) {
-    console.log('Time: ', Date.now())
+    // console.log('Time: ', Date.now())
     next()
 })
 
@@ -14,12 +14,15 @@ router.get('/', function (req, res) {
     var tagline = 'this is my tagline';
     res.render('pages/index', {
         tagline: tagline
-    });
+    }); 
 });
 
 
 var user = require('./front/user');
 router.use('/user', user)
+
+var article = require('./front/article');
+router.use('/article', article)
 
 
 module.exports = router

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <% include ../../partials/head %>
+</head>
+
+<body>
+<% include ../../partials/admin/header %>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <% include ../../partials/admin/sidebar %>
+           
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+               
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Add Articles</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group mr-2">
+                            <a href="/article/add" class="btn btn-sm btn-outline-secondary">Add</a>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                            <span data-feather="calendar"></span> 
+                            This week
+                        </button>
+                    </div>
+                </div>
+                <% include ../../partials/messages %>
+                <form  action="/article/<%  if(typeof article != 'undefined' && typeof article._id != 'undefined'){ %><%= 'update' %><% }else{%><%= 'save' %><%} %>" method="post">
+                        <input type="hidden" name="id" id="id" value="<%  if(typeof article != 'undefined' && typeof article._id != 'undefined'){ %><%= article._id %><% } %>">
+                        <div class="form-group">
+                            <label for="inputEmail">Title</label>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="Article Title" required autofocus value="<%  if(typeof article != 'undefined' && typeof article.title != 'undefined'){ %><%= article.title %><% } %>">
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="inputPassword">Description</label>
+                            <textarea  name="description" id="description" class="form-control"  required><%  if(typeof article != 'undefined' && typeof article.description != 'undefined'){ %><%= article.description %><% } %></textarea>   
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputPassword">Author</label>
+                            <input type="text" name="author" id="author" class="form-control" value="<%  if( typeof article != 'undefined' && typeof article.author != 'undefined'){ %><%= article.author %><% } %>" /> 
+                        </div>
+                        
+                        <button class="btn btn-lg btn-primary btn-block" type="submit"><%  if( typeof article != 'undefined' && typeof article._id != 'undefined'){ %><%= 'Update' %><% }else{%><%= 'Save' %><%} %></button>
+                          
+                </form>
+            </main>
+        </div>
+    </div>
+<% include ../../partials/footerscripts %> 
+</body>
+</html>
